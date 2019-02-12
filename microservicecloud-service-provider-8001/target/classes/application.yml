@@ -1,0 +1,34 @@
+server:
+  port: 8001        # 端口号
+
+mybatis:
+   config-location: classpath:mybatis/mybatis.xml              # 加载 mybatis 主配置文件
+   type-aliases-package: com.sqp.springcloud.entities   # 指定哪个包下所有类取别名
+   mapper-locations:
+    - classpath:mybatis/mapper/**/*.xml                         # 加载 mybatis 映射文件
+
+spring:
+  application:
+    name: microservicecloud-8001             # 当前服务名称
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource              # 数据源类型
+    driver-class-name: org.gjt.mm.mysql.Driver                # mysql 驱动包
+    url: jdbc:mysql://45.40.204.40:3306/test?useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
+    dbcp2:
+      min-idle: 5                                             # 数据库连接池的最小维持连接数
+
+eureka:
+  client:                                                     # 客户端注册进eureka服务列表内
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka,http://eureka7002.com:7002/eureka,http://eureka7003.com:7003/eureka
+  instance:
+    instance-id: service-provider-8001
+    prefer-ip-address: true
+
+info:
+  app.name: microservicecloud-8001
+  company.name: www.sqp.com
+  build.artifactId: microservicecloud-service-provider-8001
+  build.version: 0.0.1-SNAPSHOT
